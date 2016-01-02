@@ -68,7 +68,9 @@
       <div class="nav-wrapper"><a id="logo-container" href="/" class="black-text text-darken-2 brand-logo"><img src="/static/images/bookmyhotel.png"></a>
         <ul class="right hide-on-med-and-down" style="padding-right:30px">
           <li><a href="/">Hotels</a></li>
-          <li ng-show="{{current_user.is_admin}}=='True'"><a href="/create_hotel">Create Hotel</a></li>
+          {% if current_user.is_admin %}
+          <li><a href="/create_hotel">Create Hotel</a></li>
+          {% endif %}
           <li><a href="/bookings">My Bookings</a></li>
           <li><a class='dropdown-button' href='#' data-beloworigin="true" data-activates='dropdown1'>{{current_user.realname}}<span class="caret">&#9660;</span></a></li>
         </ul>

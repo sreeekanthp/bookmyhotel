@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookHotel">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Book Hotels</title>
+
+  
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/bootstrap-combined.min.css" rel="stylesheet">
+  <style type="text/css">
+    a:hover{
+    text-decoration: none;
+}
+  </style>
+</head>
+<body style="background:#EAEAEA">
+  <div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <nav class="red lighten-1" role="navigation" style="padding-top:20px">
+              <h2 align="center">Change Password</h2>
+        </nav>
+        <form ng-submit="ok(formpass.$valid, password)" name="formpass" novalidate>
+        <div class="modal-body">
+        
+          <div ng-hide="password_changed">
+                  <table align="center">
+                    <tr>
+                      <td style="width:10%"></td>
+                      <td>
+                        <div class="col s12 input-field">
+                          <input id="username" type="password" class="validate" placeholder="Password" ng-model="password" required="" aria-required="true">
+                        </div>
+                        <label for="username" style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !password.length">Password required
+                        </label>
+                        <div class="col s12 input-field">
+                          <input id="password" type="password" class="validate" placeholder="Repeat password" ng-model="repassword" required="" aria-required="true">
+                        </div>
+                        <label for="password" style="font-size:10px;color:red;z-index:999;" ng-show="submitted">
+                          <span ng-show="!repassword.length">Repeat password required</span><br>
+                          <span ng-show="repassword != password">Passwords must match</span>
+                        </label>
+
+                      </td>
+                      <td style="width:10%"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div ng-show="password_changed" style="padding:80px 150px">
+                  Password changed successfully
+                </div>
+          </div>
+        <div class="modal-footer">
+          <div ng-hide="password_changed">
+            <button class="btn waves-effect red lighten-2 col s2" style="width:150px" type="submit">SAVE</button>
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancel()">Cancel</button>
+          </div>
+          <div ng-show="password_changed">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancel()">Close</button>
+          </div>
+        </div>
+        </form>
+    </script>
+    <nav class="white lighten-1" role="navigation">
+      <div class="nav-wrapper"><a id="logo-container" href="/" class="black-text text-darken-2 brand-logo"><img src="/static/images/bookmyhotel.png"></a>
+        <ul class="right hide-on-med-and-down" style="padding-right:30px">
+          <li><a href="/">Hotels</a></li>
+          <li ng-show="{{current_user.is_admin}}==True"><a href="/create_hotel">Create Hotel</a></li>
+          <li><a href="/bookings">My Bookings</a></li>
+          <li><a class='dropdown-button' href='#' data-beloworigin="true" data-activates='dropdown1'>{{current_user.realname}}<span class="caret">&#9660;</span></a></li>
+        </ul>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a ng-click="open()">Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="/logout">Logout</a></li>
+          
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="/">Hotels</a></li>
+          <li><a href="/bookings">My Bookings</a></li>
+          <li><a class="setting">Settings</a></li>
+          <li><a href="/">Logout</a></li>
+        </ul>
+        
+        <!-- Modal Structure -->
+        <!-- <div id="modal1" class="modal" style="width:30%">
+          <form action="home.html" method="post">
+            <nav class="red lighten-1" role="navigation" style="padding-top:20px">
+              <h4 align="center">Change Password</h4>
+            </nav>
+            <div class="modal-content" style="color:#000">
+              <div ng-hide="password_changed">
+                <table align="center">
+                  <tr>
+                    <td style="width:10%"></td>
+                    <td>
+                      <div class="col s12">
+                        <input id="username" type="password" class="validate" placeholder="Password">
+                      </div>
+                      <div class="col s12">
+                        <input id="password" type="password" class="validate" placeholder="Repeat Password">
+                      </div>
+                    </td>
+                    <td style="width:10%"></td>
+                  </tr>
+                </table>
+              </div>
+              <div ng-show="password_changed">
+                Password changed successfully
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button style="width:150px"href="home.html" class="btn waves-effect red lighten-2 col s2" type="submit" name="action">SAVE
+              </button>
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+          </form>
+        </div> -->
+      
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+  <div class="" style="padding:10px 30px">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/angular.js"></script>
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/init.js"></script>
+  {% block page_script %} {% endblock %}
+  </body>
+</html>

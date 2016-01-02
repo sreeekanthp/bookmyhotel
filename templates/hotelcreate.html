@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="red lighten-1" role="navigation">
+  <h4 style="padding:10px 0px 0px 40px">Create Hotel</h4>
+</nav>
+<div class="row white" style="padding:60px 120px 60px 120px" ng-controller="hotelCreateFormController" ng-init="init()">
+<ul ng-repeat="error in form_error">
+  <li class="red-text" style="text-align:center;margin-top:-4%">[[error]]</li>
+</ul>
+<form ng-submit="submit(form.$valid)" name="form">
+	<table align="center" style="width:80%">
+		<tr>
+			<th>Name</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="name" type="text" class="validate" required="" aria-required="true" ng-model="formData.name">
+		          <label for="name">Name</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>About</th>
+			<td>
+				<div class="input-field col s6">
+		          <textarea id="about" class="materialize-textarea" class="validate" required="" aria-required="true" ng-model="formData.description"></textarea>
+		          <label for="about">About</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>Address</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="address" type="text" class="validate" required="" aria-required="true" ng-model="formData.address">
+		          <label for="address">Address</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>City</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="city" type="text" class="validate" required="" aria-required="true" ng-model="formData.city">
+		          <label for="city">City</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>State</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="state" type="text" class="validate" required="" aria-required="true"ng-model="formData.state">
+		          <label for="state">State</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>Country</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="country" type="text" class="validate" required="" aria-required="true" ng-model="formData.country">
+		          <label for="country">Country</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>Zipcode</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="zipcode" type="text" class="validate" required="" aria-required="true" ng-model="formData.zipcode">
+		          <label for="zipcode">Zipcode</label>
+		        </div>
+	        </td>
+		</tr>
+		<tr>
+			<th>Nightly Rate</th>
+			<td>
+				<div class="input-field col s6">
+		          <input id="nightly_rate" type="text" class="validate" required="" aria-required="true" ng-model="formData.nightly_rate">
+		          <label for="nightly_rate">Nightly Rate</label>
+		        </div>
+	        </td>
+		</tr>
+	</table>
+	<button class="btn waves-effect red lighten-1" type="submit" name="action" ng-click="hotelCreate()">create</button>
+</form>
+{% endblock %}

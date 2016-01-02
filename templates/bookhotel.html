@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="red lighten-1" role="navigation">
+  <h4 style="padding:10px 0px 0px 40px">Book Hotel</h4>
+</nav>
+<div class="row white" style="padding:60px 120px 60px 120px" ng-controller="hotelBookingFormController" ng-init="init({{hotel_id}}, {{user_id}})">
+<ul ng-repeat="error in form_error">
+  <li class="red-text" style="text-align:center;margin-top:-4%">[[error]]</li>
+</ul>
+  <form ng-submit="submit(form.$valid)" name="form">
+    <table align="left" class="responsive-table white" style="width:40%">
+      <tr>
+          <th style="width:200px">Name</th>
+          <td >[[hotel.name]]</td>
+      </tr>
+      <tr>
+          <th>Address</th>
+          <td>[[hotel.address]]</td>
+      </tr>
+      <tr>
+          <th>City</th>
+          <td>[[hotel.city]]</td>
+      </tr>
+      <tr>
+          <th>State</th>
+          <td>[[hotel.state]]</td>
+      </tr>
+      <tr>
+          <th>Zip</th>
+          <td>[[hotel.zipcode]]</td>
+      </tr>
+      <tr>
+          <th>Country</th>
+          <td>[[hotel.country]]</td>
+      </tr>
+      <tr>
+          <th>Nightly Rate</th>
+          <td>[[hotel.nightly_rate]]</td>
+      </tr>
+      <tr>
+          <th>Room Preference</th>
+          <td ng-hide="preview">
+            <div class="input-field col s12">
+              <select style="border-bottom:none" class="select" ng-model="formData.room_preference" ng-init="formData.room_preference = '1'" value="[[formData.room_preference]]">
+                <option value="1">One king-size bed</option>
+                <option value="2">Two double beds</option>
+                <option value="3">Three beds</option>
+              </select>
+             </div>
+          </td>
+          <td ng-show="preview">
+            <div class="input-field col s12">
+                <span ng-if="formData.room_preference == 1" style="margin-left:-10px">One-King sized bed</span>
+                <span ng-if="formData.room_preference == 2" style="margin-left:-10px">Two bedroom</span>
+                <span ng-if="formData.room_preference == 3" style="margin-left:-10px">Three bedroom</span>
+            </div>
+          </td>
+      </tr>
+      <tr>
+          <th>Smoking Preference</th>
+          <td ng-init="formData.smoking = true" ng-hide="preview">
+              <input name="smoking_preference" type="radio" id="smoking" class="with-gap" checked="checked" ng-disabled="preview" ng-model="formData.smoking" ng-value="true"/>
+              <label for="smoking">Smoking</label>
+              <input name="smoking_preference" type="radio" id="non_smoking" class="with-gap" ng-disabled="preview" ng-model="formData.smoking" ng-value="false"/>
+              <label for="non_smoking">Non-Smoking</label>
+          </td>
+          <td ng-show="preview">
+            <div class="input-field col s12">
+                <span ng-if="formData.smoking == true" style="margin-left:-10px;margin-left:-10px">Smoking</span>
+                <span ng-if="formData.smoking == false" style="margin-left:-10px">Non-Smoking</span>
+            </div>
+          </td>
+      </tr>
+    </table>
+    <table align="right" ng-hide="preview" class="responsive-table white" style="width:40%;margin-top:-2%">
+      <tr>
+          <th style="vertical-align: middle;">Check in date</th>
+          <td ng-hide="preview">
+            <div class="input-field">
+              <input type="text" class="datepicker" ng-model="formData.check_in" name="checkindate" class="validate" id="checkindate" required="" aria-required="true" value="[[formData.check_in]]">
+              <label for="checkindate" style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !formData.check_in.length">Check in date Required</label>
+            </div>
+          </td>
+          <td ng-show="preview" style="height:105px;padding-top:70px;text-align: left;padding-left:80px">[[formData.check_in]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: middle;">Check out date</th>
+          <td ng-hide="preview">
+            <div class="input-field">
+              <input type="text" class="datepicker" id="checkoutdate"  ng-model="formData.check_out" required="" aria-required="true" value="[[formData.check_out]]">
+              <label for="checkoutdate"style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !formData.check_out.length">Check out date Required</label>
+              <label for="checkoutdate"style="font-size:10px;color:red;z-index:999;" ng-if="formData.check_out < formData.check_in">Check out date must greater</label>
+            </div>
+          </td>
+          <td ng-show="preview" style="height:105px;padding-top:70px;text-align: left;padding-left:80px">[[formData.check_out]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: middle;">Credit card #</th>
+          <td ng-hide="preview">
+            <div class="input-field">
+              <input id="card" type="text" class="validate" ng-model="formData.credit_card_number" value="[[formData.credit_card_number]]">
+              <label for="card" style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !formData.credit_card_number.length">Credit card # Required</label>
+            </div>
+          </td>
+          <td ng-show="preview" style="height:105px;padding-top:70px;text-align: left;padding-left:80px">[[formData.credit_card_number]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: middle;">Credit Card Name</th>
+          <td ng-hide="preview">
+            <div class="input-field">
+              <input id="name" type="text" class="validate" ng-model="formData.credit_card_name" value="[[formData.credit_card_name]]">
+              <label for="name" style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !formData.credit_card_name.length">Credit Card Name Required</label>
+            </div>
+          </td>
+          <td ng-show="preview" style="height:105px;padding-top:70px;text-align: left;padding-left:80px">[[formData.credit_card_name]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: middle;">Credit Card Expire</th>
+          <td ng-hide="preview">
+            <div class="input-field">
+              <input id="exp" type="text" class="datepicker1" ng-model="formData.credit_card_expiry" required="" aria-required="true" value="[[formData.credit_card_expiry]]">
+              <label for="exp" style="font-size:10px;color:red;z-index:999;" ng-show="submitted && !formData.credit_card_expiry.length">Credit Card Expire Required</label>
+            </div>
+          </td>
+          <td ng-show="preview" style="height:105px;text-align: left;padding-top:70px;padding-left:80px">[[formData.credit_card_expiry]]</td>
+      </tr>
+      <tr>
+        <td>
+          
+        </td>
+        <td>
+          
+        </td>
+      </tr>
+      <tr ng-hide="preview">
+          <th>
+              <button class="btn waves-effect red lighten-1" type="submit" name="action">Procced</button>
+          </th>
+          <td>
+            <button type="reset" class="btn-flat">CANCEL</button>
+          </td>
+      </tr>
+  	</table>
+
+    <table align="right" ng-show="preview" class="responsive-table white" style="width:40%">
+      <tr>
+          <th style="vertical-align: bottom;width:200px">Check in date</th>
+          <td ng-show="preview">[[formData.check_in]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: bottom;">Check out date</th>
+         
+          <td ng-show="preview">[[formData.check_out]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: bottom;">Credit card #</th>
+          
+          <td ng-show="preview">[[formData.credit_card_number]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: bottom;">Credit Card Name</th>
+          
+          <td ng-show="preview">[[formData.credit_card_name]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: bottom;">Credit Card Expire</th>
+          
+          <td ng-show="preview">[[formData.credit_card_expiry]]</td>
+      </tr>
+      <tr>
+          <th style="vertical-align: bottom;">Total Cost</th>
+          
+          <td ng-show="preview">$ [[total_cost]]</td>
+      </tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr><td> </td><td></td></tr>
+      <tr ng-show="preview">
+          <th>
+              <button class="btn waves-effect red lighten-1" type="submit" name="action" ng-click="postBooking()">Confirm</button>
+          </th>
+          <td>
+            <button type="reset" class="btn-flat" ng-click="preview=false">EDIT</button>
+          </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}
+
+{% block page_script %}
+<script type="text/javascript">
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    format: 'yyyy-mm-dd'
+  });
+  $('.datepicker1').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    format: 'yyyy-mm-dd'
+  });
+  $(document).ready(function() {
+  $('select').material_select();
+  });
+  $(".setting").click(function(){
+    $('#modal1').openModal();
+  });
+
+</script>
+{% endblock %}

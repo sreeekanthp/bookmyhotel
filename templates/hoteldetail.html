@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div ng-controller="hotelViewController" ng-init="init({{hotel_id}})">
+  <nav class="red lighten-1" role="navigation">
+    <h4 style="padding:10px 0px 0px 40px">[[hotel.name]]</h4>
+  </nav>
+  <div class="row white" style="">
+    <div class="col s11 m6" style="padding:60px 60px">
+      <p>[[hotel.description]]</p>
+      <table class="responsive-table white" >
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>Address</th>
+          <td>[[hotel.address]]</td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>City</th>
+          <td>[[hotel.city]]</td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>State</th>
+          <td>[[hotel.state]]</td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>Country</th>
+          <td>[[hotel.country]]</td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>Zipcode</th>
+          <td>[[hotel.zipcode]]</td>
+        </tr>
+        <tr style="line-height:1px">
+          <th>Nightly Rate</th>
+          <td>$ [[hotel.nightly_rate]]</td>
+        </tr>
+    	</table>
+    	<br><br>
+      <div class="col s11 m12">
+        <a href="/book_hotel/[[hotel.id]]" style="color:#ee6e73" ><h5 class="btn waves-effect red lighten-1">BOOK NOW</h5></a>
+      </div>
+      <p>
+        <!-- <h6 style="float:left">Rate : $[[hotel.nightly_rate]]</h6> -->
+      </p>
+    </div>
+    <div class="col s11 m6">
+      <div class="card">
+        <div ng-show="mapResult.length != 0" id="map" style="width: 100%;height: 400px;"></div>
+        <div ng-hide="mapResult.length != 0">
+          <img src="/static/images/map-not-available_lg.gif">
+        </div>
+  		</div>
+    </div>
+  </div>
+</div>
+{% endblock%}
+
+{% block page_script %}
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script type="text/javascript">
+  $(".setting").click(function(){
+    $('#modal1').openModal();
+  });
+  </script>
+{% endblock %}

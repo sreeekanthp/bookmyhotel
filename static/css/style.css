@@ -1,0 +1,53 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+.background { 
+	  background: url(../images/background.jpg) no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+}
+.col.s12.m6{
+    float: none;
+    margin: 190px auto;
+    width: 450px;
+    height: 450px;
+}
+.btn {
+	display: block; 
+	width: 100%;
+}
+
+th {
+	border-radius: 0;
+
+}
+tr.four-px { height:4px;  }
+tr.four-px td { background:#ff9; font-size:4px; line-height:1; }
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #4d4d4d;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #4d4d4d;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #4d4d4d;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #4d4d4d;
+}

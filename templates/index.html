@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookHotel">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Booking Demo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body class="background" ng-controller="hotelLoginController">
+  <div class="container"> 
+    <div class="row">
+      <div class="col s12 m6">
+          <div class="card">
+            </br>
+              <div class="card-content">
+              <img style="display: block;margin-left: auto;margin-right: auto" src="/static/images/bookmyhotel.png">
+                  <form method="post" ng-show="show_login_form" ng-submit="login(username, password)">
+                      <div class="row" style="padding:0px 15px 0px 15px">
+                          <div class="input-field col s12">
+                              <input id="username" type="text" class="validate" ng-model="username" cclass="validate" required="" aria-required="true">
+                              <label for="username" class="active">User name</label>
+                          </div>
+                      </div>
+                      <div class="row" style="padding:0px 15px 0px 15px">
+                          <div class="input-field col s12">
+                              <input id="password" type="password" class="validate" ng-model="password" class="validate" required="" aria-required="true">
+                              <label for="password" class="active">Password</label>
+                          </div>
+                          <div class="input-field col s12" ng-show="login_error">
+                            <label style="color:red" class="active">[[login_error]]</label>
+                          </div>
+                      </div>
+                      <div class="card-action center">
+                        <button class="btn waves-effect red lighten-1" type="submit" name="action">LOG IN
+                        </button>
+                        <label></label>
+                      </div>
+                  </form>
+
+                  <form method="post" ng-hide="show_login_form" ng-submit="signup(username, realname, password)">
+                      <div class="row" style="padding:0px 15px 0px 15px">
+                          <div class="input-field col s12">
+                              <input id="username" type="text" class="validate" ng-model="username" class="validate" required="" aria-required="true">
+                              <label for="username" class="active">User name</label>
+                          </div>
+                      </div>
+                      <div class="row" style="padding:0px 15px 0px 15px">
+                          <div class="input-field col s12">
+                              <input id="realname" type="text" class="validate" ng-model="realname" class="validate" required="" aria-required="true">
+                              <label for="realname" class="active">Real Name</label>
+                          </div>
+                      </div>
+                      <div class="row" style="padding:0px 15px 0px 15px">
+                          <div class="input-field col s12">
+                              <input id="password" type="password" class="validate" ng-model="password" class="validate" required="" aria-required="true">
+                              <label for="password" class="active">Password</label>
+                          </div>
+                        <div class="input-field col s12" ng-show="signup_error">
+                          <label class="active" style="color:red">[[signup_error]]</label>
+                        </div>
+                      </div>
+                      <div class="card-action center">
+                        <button href="/" class="btn waves-effect red lighten-1" type="submit" name="action">SIGN UP
+                        </button>
+                        <label></label>
+                      </div>
+                  </form>
+
+                <div class="card-action1 center">
+                  <a class="waves-effect btn-flat" ng-show="show_login_form" ng-click="show_login_form = false">Sign up</a>
+                  <a class="waves-effect btn-flat" ng-hide="show_login_form" ng-click="show_login_form = true">Login</a>
+                </div>
+            </div>
+          </br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/angular.js"></script>
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+  <script src="/static/js/init.js"></script>
+  <script src="/static/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="min-height:500px" class="white" ng-controller="hotelBookingListingController">
+  <!-- <h3 class="header black-text" style="padding:10px">Hotels</h3> -->
+  <div class="input-field" style="height:50px">
+    <input type="search" id="search-field" class="field" required maxlength="" style="border:none;" placeholder="Search bookings" ng-model="search">
+    <label for="search-field">
+      <!-- <i class="mdi-action-search" style="color:#000"></i> -->
+    </label>
+    <!-- <i class="mdi-navigation-close close"></i> -->
+  </div>
+  <table class="highlight centered responsive-table" >
+    <thead class="red lighten-1">
+      <tr>
+          <th data-field="id" style="color:#fff">Name</th>
+          <th data-field="name" style="color:#fff">Address</th>
+          <th data-field="name" style="color:#fff">City,State</th>
+          <th data-field="number" style="color:#fff">Check In</th>
+          <th data-field="number" style="color:#fff">Check Out</th>
+          <th data-field="name"  style="color:#fff">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="booking in booking_list | filter:search">
+        <td>[[booking.hotel.name]]</td>
+        <td>[[booking.hotel.address]]</td>
+        <td>[[booking.hotel.city]], [[booking.hotel.state]]</td>
+        <td>[[booking.check_in | date: "yyyy-MM-dd"]]</td>
+        <td>[[booking.check_out | date: "yyyy-MM-dd"]]</td>
+        <td><a style="padding:0" class="waves-effect waves-teal btn-flat" ng-click="cancel_booking([[booking.id]])">Cancel</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="valign-wrapper" style="display:block;padding-top:100px;" ng-show="booking_list.length==0">
+    <h6 class="valign center">Book hotels to list your bookings here</h6>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_script %}
+  <script type="text/javascript">
+  $(".setting").click(function(){
+    $('#modal1').openModal();
+  });
+  </script>
+{% endblock %}

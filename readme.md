@@ -15,7 +15,7 @@ How to Install
 
 - Clone the repository
 
- - git clone https://sreekanthkaralmanna@bitbucket.org/sreekanthkaralmanna/hotel_booking.git
+ - git clone https://github.com/sreekanthkaralmanna/bookmyhotel.git
 
 - Create a python3 virtual environment and activate the environment.
 	- `virtualenv bookmyhotel`

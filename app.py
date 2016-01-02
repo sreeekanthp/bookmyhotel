@@ -34,7 +34,7 @@ def requires_admin_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if not flask_login.current_user.is_admin:
-            return False
+            return redirect(url_for('home'))
         return f(*args, **kwargs)
     return decorated
 

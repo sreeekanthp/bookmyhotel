@@ -35,17 +35,17 @@ How to Install
 	- `python manage.py create_superuser -u <user_name> -p <password>`
 
 - Run application.
-	- python app.py
+	- `python app.py`
 
 
 User Roles
 ----------
-There will be types of users in the application.
+There will be two types of users in the application.
 
  - Admin user (created by `python manage.py create_superuser` command)
  - Application user
 
-Only admin user will has the privilege to create hotels.
+Only admin user will have the privilege to create hotels.
 
 
 Public APIs
